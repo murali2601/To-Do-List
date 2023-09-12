@@ -1,6 +1,6 @@
 TO_DO_LIST Web Application made using Django Framework without the use of JavaScript.
 
-LinkedIn : https://www.linkedin.com/posts/murali-dharan-s-808135217_django-keepnotes-bootstrap5-activity-7107315394964594688-3Nti?utm_source=share&utm_medium=member_desktop
+LinkedIn : https://www.linkedin.com/posts/murali-dharan-s-808135217_django-keepnotes-bootstrap5-activity-7107315394964594688-3Nti?utm_source=share&utm_medium=member_desktop <br>
 .
 Demonstration video (YouTuube) : https://youtu.be/T4mQ8Qyj2jU?feature=shared
 .
