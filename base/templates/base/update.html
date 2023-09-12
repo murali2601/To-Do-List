@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update "{{update.todo}}"</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/6a72a8e32d.js" crossorigin="anonymous"></script>
+  
+    <style>
+        body{
+            margin: 10% 20%;
+            background: #0575E6;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #021B79, #0575E6);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #021B79, #0575E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+    </style>
+</head>
+<body>
+    <div class="card p-5 text-center m-5 rounded-5">
+        <h2>Update "{{update.todo}}"</h2> <br>
+        <br>
+    <form action="" method="post">
+        {% csrf_token %}
+     <p class="fs-5"> Edit Task : {{forms.todo}}</p>
+    <p class="fs-5">Mark as Done : {{forms.complete}}</p> 
+    <a href="{% url 'todo' user.id %}" class="btn btn-secondary rounded-4"><i class="fa-solid fa-chevron-left"></i>&nbsp; Go Back</a> &nbsp;
+        <button type="submit" class="btn btn-primary rounded-4"><i class="fa-solid fa-file-pen"></i>&nbsp; Update</button>
+    </form>
+</div>
+</body>
+</html>

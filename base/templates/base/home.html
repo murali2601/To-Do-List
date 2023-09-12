@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{user}}'s Todo List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/6a72a8e32d.js" crossorigin="anonymous"></script>
+    
+</head>
+<style>
+    body{
+        margin: 5% 20%;
+        background: #FEAC5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    }
+</style>
+<body>
+    <div class="card p-5 m-3 rounded-5">
+    <h2 class="text-center font-monospace">Keep Notes</h2> <br>
+    <div class="card-body bg-secondary bg-opacity-25 p-4 rounded-4">
+    {% if request.user.is_authenticated %}
+    <h3 class="font-monospace">Welcome <strong>{{user.username}}</strong> </h3>
+   
+    {% endif %}
+
+  <br>
+    <a href="{% url 'logout' %}"><button  class="btn btn-danger rounded-4"><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp; Logout</button></a>  <br>
+ 
+</div>
+<br>
+    <form class="d-flex" role="search" method="post">
+        {% csrf_token %}
+        <input class="form-control me-2 bg-secondary bg-opacity-10 p-2 rounded-4 border border-primary" type="search" placeholder="Enter your task" name="add" aria-label="Search">
+        <button class="btn btn-primary bg-opacity-25 p-3 rounded-4" type="submit"><i class="fa-solid fa-plus"></i></button>
+      </form>
+  <br>
+    
+    {% for task in tasks %}
+    {% if request.user.id == task.author.id %}
+   
+    <ul class="list-group  rounded-4">
+        
+            {% if task.complete == True %}
+            <li class="list-group-item bg-danger bg-opacity-25 p-3 rounded-4">
+                <strike class="fs-5"><i class="fa-solid fa-ban fa-xs"></i>&nbsp; {{task.todo}} </strike> &nbsp;&nbsp;
+                <i style="display: inline-block; float: right;">Updated  {{task.updated | timesince}}</i>  <br> <br>
+                <p class="fs-6 text-danger">Marked as Done</p>
+                <div style="display: inline-block; float: right;">
+                    <a href="{% url 'update' task.id %}"  class="btn btn-primary rounded-4"><i class="fa-regular fa-pen-to-square"></i>&nbsp; Update</a> &nbsp;&nbsp;
+                    <a href="{% url 'delete' task.id %}"  class="btn btn-danger rounded-4"><i class="fa-solid fa-trash"></i>&nbsp; Delete</a>
+                </div>
+            </li>
+            {% else %}
+            <li class="list-group-item bg-primary bg-opacity-25 p-3 rounded-4">
+                <p class="fs-5"><i class="fa-solid fa-thumbtack fa-xs"></i>&nbsp; {{task.todo}}</p>  &nbsp;&nbsp;
+                <i>Added on {{task.created}} ( {{task.created | timesince}} )</i>
+                <div style="display: inline-block; float: right;">
+                    <a href="{% url 'update' task.id %}"  class="btn btn-primary rounded-4"><i class="fa-regular fa-pen-to-square"></i>&nbsp; Update</a> &nbsp;&nbsp;
+                    <a href="{% url 'delete' task.id %}"  class="btn btn-danger rounded-4"><i class="fa-solid fa-trash"></i>&nbsp; Delete</a>
+                </div>
+            {% endif %}
+        </li>
+                
+        
+                
+      </ul>
+      <br>
+        {% endif %}
+        {% empty %}
+        <h4>Task is empty</h4>
+        
+    {% endfor %}
+    <br>
+    <a href="https://muralidharan.netlify.app" target="_blank" style="text-decoration: none; color: black;"><i class="fa-solid fa-egg fa-2xl" style="color: #ffc88a;"></i>&nbsp; Easter Egg (click to crack)</a>
+</div>
+</body>
+</html>
